@@ -6,7 +6,7 @@
 # Tech Stack & Constraints
 - **Framework:** Next.js 14 (App Router) with TypeScript.
 - **State Management:** Zustand with `persist` middleware.
-- **Styling:** Tailwind CSS and shadcn/ui.
+- **Styling:** Tailwind CSS, shadcn/ui, and **Framer Motion** for animations.
 - **Analytics:** Recharts for progress visualization.
 - **Data Persistence:** LocalStorage for the MVP, structured with versioned migrations.
 - **Video Handling:** standard YouTube IFrame API and YouTube Data API.
@@ -34,9 +34,11 @@
    - [x] **Thorough Application**: Themes control background, sidebar, and chart accent colors.
 7. **Performance & Polish:**
    - [x] **Lazy Loading Screen**: Full-screen branded loader shown during store hydration.
+   - [x] **Smooth Route Transitions**: Fluid fade and slide-up animations using Framer Motion.
+   - [x] **Zustand Selector Optimization**: Drastically reduced re-renders by switching to specific store subscribers.
    - [x] **Dynamic Imports**: Reduced initial bundle size by lazy loading charts and dialogs.
    - [x] **Image Optimization**: Explicit lazy loading for external thumbnails.
-   - [x] **Centralized Constants**: All tags, themes, and default settings defined in `src/constants/index.ts` as a single source of truth.
+   - [x] **Centralized Constants**: All tags, themes, and default settings defined in `src/constants/index.ts`.
 
 # UI/UX Requirements
 - **Dashboard Layout:** Sidebar navigation with personalized greetings.

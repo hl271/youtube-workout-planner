@@ -43,7 +43,7 @@ export const DEFAULT_USER_SETTINGS: UserSettings = {
 };
 
 // ─── Pagination Config ─────────────────────────────────────────
-export const LIBRARY_BATCH_SIZE = 8;
+export const LIBRARY_BATCH_SIZE = 12;
 
 // ─── Store Config ──────────────────────────────────────────────
 export const STORE_VERSION = 3;

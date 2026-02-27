@@ -36,7 +36,8 @@ interface VideoCardProps {
 }
 
 export const VideoCard = memo(function VideoCard({ video }: VideoCardProps) {
-    const { removeVideo, scheduleWorkout } = useWorkoutStore();
+    const removeVideo = useWorkoutStore((state) => state.removeVideo);
+    const scheduleWorkout = useWorkoutStore((state) => state.scheduleWorkout);
     const [isScheduleOpen, setIsScheduleOpen] = useState(false);
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());

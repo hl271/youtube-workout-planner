@@ -125,16 +125,34 @@ This document tracks the evolution of the **YouTube Workout Planner** project, d
 
 ---
 
+### 11. Navigation Performance Tuning & Route Transitions
+**Agent ID:** `antigravity`
+- **Goal:** Fix sidebar navigation lag (up to 10s delay) and enhance UX with smooth transitions.
+- **Root Causes Identified:** Components were over-subscribed to the Zustand store, causing full-page re-renders on any store update. Lack of visual feedback during mount.
+- **Terminal Commands:**
+    ```bash
+    npm install framer-motion
+    ```
+- **Codebase Progress:**
+    - **[NEW]** `src/components/page-transition.tsx` -> Created a reusable motion wrapper for page components.
+    - **[MODIFIED]** `src/store/workoutStore.ts` -> Ensured clean state access.
+    - **[MODIFIED]** `src/app/page.tsx`, `src/app/library/page.tsx`, `src/app/planner/page.tsx` -> Refactored all page components to use **Zustand selectors** (e.g., `useWorkoutStore(state => state.videos)`) instead of destructuring the whole store.
+    - **[MODIFIED]** `src/components/video-card.tsx` -> Optimized selectors for memoized cards.
+    - **[MODIFIED]** `src/app/layout.tsx` -> Wrapped the main content area in `<PageTransition>` to provide instant visual feedback during section switching.
+
+---
+
 ## 📝 Technical Progress Tracking
 
 | Component | Status | Persistence | Optimization |
 | :--- | :--- | :--- | :--- |
-| **Core Store (Zustand)** | ✅ Stable | LocalStorage | Persist Middleware |
+| **Core Store (Zustand)** | ✅ Stable | LocalStorage | **Specific Selectors** |
 | **Library Filters** | ✅ Advanced | N/A | Multi-Tag Filtering |
 | **Planner Logic** | ✅ Complete | LocalStorage | Atomic Batch Updates |
 | **Analytics (Recharts)** | ✅ Integrated | N/A | Dynamic Imports |
 | **Visual Theming** | ✅ 5 Themes | LocalStorage | Un-layered CSS Overrides |
 | **Constants** | ✅ Centralized | N/A | Single Source of Truth |
 | **Infinite Scroll** | ✅ Batches of 12 | N/A | Skeletons + Memoization |
+| **UX/Animations** | ✅ Seamless | N/A | **Framer Motion Transitions** |
 
 *Last Updated: February 28, 2026*

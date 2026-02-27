@@ -28,7 +28,7 @@ const WORKOUT_TYPES_WITH_ALL: (WorkoutType | "All")[] = ["All", ...WORKOUT_TYPES
 const BODY_PARTS_WITH_ALL: (BodyPart | "All")[] = ["All", ...BODY_PARTS];
 
 export default function LibraryPage() {
-    const { videos } = useWorkoutStore();
+    const videos = useWorkoutStore((state) => state.videos);
     const [search, setSearch] = useState("");
     const [typeFilter, setTypeFilter] = useState<(WorkoutType | "All")>("All");
     const [bodyPartFilter, setBodyPartFilter] = useState<(BodyPart | "All")>("All");

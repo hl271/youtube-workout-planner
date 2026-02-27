@@ -25,7 +25,10 @@ import { RandomSchedulerDialog } from "@/components/random-scheduler-dialog";
 import { Wand2 } from "lucide-react";
 
 export default function PlannerPage() {
-    const { schedule, videos, toggleComplete, removeFromSchedule } = useWorkoutStore();
+    const schedule = useWorkoutStore((state) => state.schedule);
+    const videos = useWorkoutStore((state) => state.videos);
+    const toggleComplete = useWorkoutStore((state) => state.toggleComplete);
+    const removeFromSchedule = useWorkoutStore((state) => state.removeFromSchedule);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [isSchedulerOpen, setIsSchedulerOpen] = useState(false);
 

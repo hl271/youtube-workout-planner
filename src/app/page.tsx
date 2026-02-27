@@ -41,7 +41,10 @@ const WorkoutBarChart = dynamic(() => import("@/components/dashboard-charts").th
 });
 
 export default function DashboardPage() {
-  const { schedule, videos, toggleComplete, settings } = useWorkoutStore();
+  const schedule = useWorkoutStore((state) => state.schedule);
+  const videos = useWorkoutStore((state) => state.videos);
+  const toggleComplete = useWorkoutStore((state) => state.toggleComplete);
+  const settings = useWorkoutStore((state) => state.settings);
 
   const [viewDate, setViewDate] = useState(new Date());
 

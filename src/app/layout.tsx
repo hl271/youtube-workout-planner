@@ -6,6 +6,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { HydrationProvider } from "@/components/hydration-provider";
+import { PageTransition } from "@/components/page-transition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,9 @@ export default function RootLayout({
                     <div className="mb-8 flex items-center md:hidden">
                       <SidebarTrigger />
                     </div>
-                    {children}
+                    <PageTransition>
+                      {children}
+                    </PageTransition>
                   </div>
                 </main>
               </div>

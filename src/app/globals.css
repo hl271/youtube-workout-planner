@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Theme overrides - outside @layer to ensure they always override :root defaults */
+html.theme-dark {
+  /* Default dark mode variables are already set in :root */
+}
+
+html.theme-white {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 98%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 100%;
+  --ring: 240 5.9% 10%;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 10% 3.9%;
+  --sidebar-border: 240 5.9% 90%;
+}
+
+html.theme-mint {
+  --background: 160 84% 95%;
+  --foreground: 160 84% 15%;
+  --card: 160 84% 90%;
+  --card-foreground: 160 84% 15%;
+  --popover: 160 84% 92%;
+  --popover-foreground: 160 84% 15%;
+  --muted: 160 84% 85%;
+  --muted-foreground: 160 84% 30%;
+  --secondary: 160 84% 88%;
+  --secondary-foreground: 160 84% 15%;
+  --accent: 160 84% 88%;
+  --accent-foreground: 160 84% 15%;
+  --border: 160 84% 80%;
+  --input: 160 84% 80%;
+  --primary: 160 84% 35%;
+  --primary-foreground: 0 0% 100%;
+  --ring: 160 84% 35%;
+  --sidebar-background: 160 84% 92%;
+  --sidebar-foreground: 160 84% 15%;
+  --sidebar-border: 160 84% 80%;
+}
+
+html.theme-sky {
+  --background: 199 89% 95%;
+  --foreground: 199 89% 15%;
+  --card: 199 89% 90%;
+  --card-foreground: 199 89% 15%;
+  --popover: 199 89% 92%;
+  --popover-foreground: 199 89% 15%;
+  --muted: 199 89% 85%;
+  --muted-foreground: 199 89% 30%;
+  --secondary: 199 89% 88%;
+  --secondary-foreground: 199 89% 15%;
+  --accent: 199 89% 88%;
+  --accent-foreground: 199 89% 15%;
+  --border: 199 89% 80%;
+  --input: 199 89% 80%;
+  --primary: 199 89% 35%;
+  --primary-foreground: 0 0% 100%;
+  --ring: 199 89% 35%;
+  --sidebar-background: 199 89% 92%;
+  --sidebar-foreground: 199 89% 15%;
+  --sidebar-border: 199 89% 80%;
+}
+
+html.theme-peach {
+  --background: 20 90% 95%;
+  --foreground: 20 90% 15%;
+  --card: 20 90% 90%;
+  --card-foreground: 20 90% 15%;
+  --popover: 20 90% 92%;
+  --popover-foreground: 20 90% 15%;
+  --muted: 20 90% 85%;
+  --muted-foreground: 20 90% 30%;
+  --secondary: 20 90% 88%;
+  --secondary-foreground: 20 90% 15%;
+  --accent: 20 90% 88%;
+  --accent-foreground: 20 90% 15%;
+  --border: 20 90% 80%;
+  --input: 20 90% 80%;
+  --primary: 20 90% 35%;
+  --primary-foreground: 0 0% 100%;
+  --ring: 20 90% 35%;
+  --sidebar-background: 20 90% 92%;
+  --sidebar-foreground: 20 90% 15%;
+  --sidebar-border: 20 90% 80%;
+}

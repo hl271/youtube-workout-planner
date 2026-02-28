@@ -39,6 +39,9 @@ export default function SettingsPage() {
             title: "Data Exported",
             description: "Your workout database has been saved to a local file.",
         });
+
+        // Update last exported timestamp
+        updateSettings({ lastExportedAt: new Date().toISOString() });
     };
 
     const handleImportClick = () => {

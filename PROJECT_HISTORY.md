@@ -142,6 +142,17 @@ This document tracks the evolution of the **YouTube Workout Planner** project, d
 
 ---
 
+### 12. Backup Awareness & Data Protection System
+**Agent ID:** `antigravity`
+- **Goal:** Prevent data loss from browser cache clears by providing interactive backup status and recommendations.
+- **Codebase Progress:**
+    - **[MODIFIED]** `src/types/index.ts` -> Added `lastExportedAt` to `UserSettings`.
+    - **[MODIFIED]** `src/constants/index.ts` -> Added `BACKUP_REMINDER_DAYS: 30`.
+    - **[MODIFIED]** `src/app/settings/page.tsx` -> Integrated automatic timestamp recording upon successful JSON export.
+    - **[MODIFIED]** `src/app/page.tsx` -> Implemented a reactive "Last Backup" card in the stats grid. Features on-click intelligent diagnosis: validates data staleness (>30 days) or volume (>10 videos without backup) and provides direct "Backup Now" calls-to-action via Toast.
+
+---
+
 ## 📝 Technical Progress Tracking
 
 | Component | Status | Persistence | Optimization |
@@ -154,5 +165,6 @@ This document tracks the evolution of the **YouTube Workout Planner** project, d
 | **Constants** | ✅ Centralized | N/A | Single Source of Truth |
 | **Infinite Scroll** | ✅ Batches of 12 | N/A | Skeletons + Memoization |
 | **UX/Animations** | ✅ Seamless | N/A | **Framer Motion Transitions** |
+| **Data Protection** | ✅ Interactive | LocalStorage | **Backup Status Monitoring** |
 
 *Last Updated: February 28, 2026*

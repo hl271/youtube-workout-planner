@@ -28,6 +28,7 @@ export interface UserSettings {
     name: string;
     monthlyGoal: number;
     theme: AppTheme;
+    lastExportedAt?: string;
 }
 
 export interface AppState {

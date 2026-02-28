@@ -48,6 +48,7 @@
 # Rules & Logic
 - **Validation:** Do not allow saving a workout without a duration and at least one category.
 - **Persistence:** Ensure the "Completed" status is tied to the specific date on the calendar, not just the video itself.
+- **Data Safety:** Interactive backup monitoring on Dashboard to prevent data loss from browser cache clears.
 
 # Expected Output
 Please provide the complete code for this application. Start by providing the directory structure for a Next.js App Router project, then provide the code for:

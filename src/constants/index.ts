@@ -36,10 +36,13 @@ export const VALID_THEME_NAMES: AppTheme[] = THEMES.map((t) => t.name);
 export const THEME_CSS_CLASSES: string[] = THEMES.map((t) => `theme-${t.name}`);
 
 // ─── Default User Settings ─────────────────────────────────────
+export const BACKUP_REMINDER_DAYS = 30;
+
 export const DEFAULT_USER_SETTINGS: UserSettings = {
     name: "Athlete",
     monthlyGoal: 20,
     theme: "dark",
+    lastExportedAt: undefined,
 };
 
 // ─── Pagination Config ─────────────────────────────────────────

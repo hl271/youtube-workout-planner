@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   format,
   startOfMonth,
@@ -9,7 +9,10 @@ import {
   addMonths,
   subMonths,
   eachWeekOfInterval,
-  endOfWeek
+  endOfWeek,
+  differenceInDays,
+  parseISO,
+  formatDistanceToNow
 } from "date-fns";
 import {
   Trophy,
@@ -21,6 +24,7 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  ShieldCheck,
 } from "lucide-react";
 import { useWorkoutStore } from "@/store/workoutStore";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +33,9 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { BACKUP_REMINDER_DAYS } from "@/constants";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const YouTubePlayer = dynamic(() => import("@/components/youtube-player").then((mod) => mod.YouTubePlayer), {
   ssr: false,
@@ -45,8 +52,51 @@ export default function DashboardPage() {
   const videos = useWorkoutStore((state) => state.videos);
   const toggleComplete = useWorkoutStore((state) => state.toggleComplete);
   const settings = useWorkoutStore((state) => state.settings);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const [viewDate, setViewDate] = useState(new Date());
+
+  const handleCheckBackupStatus = () => {
+    if (settings.lastExportedAt) {
+      const lastExport = parseISO(settings.lastExportedAt);
+      const daysSinceExport = differenceInDays(new Date(), lastExport);
+
+      if (daysSinceExport >= BACKUP_REMINDER_DAYS) {
+        toast({
+          title: "Data Backup Recommended",
+          description: `It's been ${daysSinceExport} days since your last local backup. Download your data to keep it safe!`,
+          action: (
+            <Button variant="outline" size="sm" onClick={() => router.push('/settings')}>
+              Backup Now
+            </Button>
+          ),
+        });
+      } else {
+        toast({
+          title: "Data is Up to Date",
+          description: `Your last backup was ${formatDistanceToNow(lastExport, { addSuffix: true })}. Your data is currently well-protected.`,
+        });
+      }
+    } else {
+      if (videos.length >= 10) {
+        toast({
+          title: "Protect Your Data",
+          description: "You have significant workout data but haven't created a local backup yet. We highly recommend doing so!",
+          action: (
+            <Button variant="outline" size="sm" onClick={() => router.push('/settings')}>
+              Backup Now
+            </Button>
+          ),
+        });
+      } else {
+        toast({
+          title: "No Backups Yet",
+          description: "You haven't exported your data yet. Once you have more workouts, we'll suggest keeping a local copy safe.",
+        });
+      }
+    }
+  };
 
   const today = useMemo(() => new Date(), []);
   const todayWorkouts = useMemo(() => {
@@ -129,7 +179,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="bg-primary/5 border-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Monthly Progress</CardTitle>
@@ -160,6 +210,33 @@ export default function DashboardPage() {
               {Math.floor(stats.totalDuration / 60)}h {stats.totalDuration % 60}m
             </div>
             <p className="text-xs text-muted-foreground">Total minutes trained</p>
+          </CardContent>
+        </Card>
+        <Card
+          className={cn(
+            "cursor-pointer transition-all active:scale-95",
+            (!settings.lastExportedAt && videos.length >= 10) || (settings.lastExportedAt && differenceInDays(new Date(), parseISO(settings.lastExportedAt)) >= BACKUP_REMINDER_DAYS)
+              ? "border-orange-500/50 bg-orange-500/5 hover:bg-orange-500/10"
+              : "hover:bg-accent"
+          )}
+          onClick={handleCheckBackupStatus}
+        >
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Last Backup</CardTitle>
+            <ShieldCheck className={cn(
+              "h-4 w-4",
+              (!settings.lastExportedAt && videos.length >= 10) || (settings.lastExportedAt && differenceInDays(new Date(), parseISO(settings.lastExportedAt)) >= BACKUP_REMINDER_DAYS)
+                ? "text-orange-500"
+                : "text-green-500"
+            )} />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {settings.lastExportedAt
+                ? formatDistanceToNow(parseISO(settings.lastExportedAt), { addSuffix: true })
+                : "Never"}
+            </div>
+            <p className="text-xs text-muted-foreground">Click to check status</p>
           </CardContent>
         </Card>
       </div>

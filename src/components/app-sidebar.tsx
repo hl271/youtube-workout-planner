@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import AppIcon from "@/app/icon.png";
 
 const items = [
     {
@@ -43,12 +45,27 @@ export function AppSidebar() {
 
     return (
         <Sidebar collapsible="icon">
-            <SidebarHeader className="flex items-center justify-center py-6">
-                <h1 className="text-xl font-bold text-primary group-data-[collapsible=icon]:hidden">
-                    Workout Planner
-                </h1>
+            <SidebarHeader className="flex items-center justify-center gap-3 py-6">
+                <div className="flex items-center gap-3 group-data-[collapsible=icon]:hidden">
+                    <Image
+                        src={AppIcon}
+                        alt="App Logo"
+                        width={32}
+                        height={32}
+                        className="rounded-lg shadow-sm"
+                    />
+                    <h1 className="text-xl font-bold text-primary">
+                        Workout Planner
+                    </h1>
+                </div>
                 <div className="hidden group-data-[collapsible=icon]:block">
-                    <Calendar className="h-6 w-6 text-primary" />
+                    <Image
+                        src={AppIcon}
+                        alt="App Logo"
+                        width={24}
+                        height={24}
+                        className="rounded-md shadow-sm"
+                    />
                 </div>
             </SidebarHeader>
             <SidebarContent>

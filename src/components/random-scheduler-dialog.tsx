@@ -25,7 +25,7 @@ import { Separator } from "@/components/ui/separator";
 import { useWorkoutStore } from "@/store/workoutStore";
 import { WorkoutType, Equipment, BodyPart, WorkoutVideo } from "@/types";
 import { cn } from "@/lib/utils";
-import { WORKOUT_TYPES, BODY_PARTS as BODY_PART_OPTIONS } from "@/constants";
+import { WORKOUT_TYPES, BODY_PARTS as BODY_PART_OPTIONS, EQUIPMENT_OPTIONS } from "@/constants";
 
 interface RandomSchedulerDialogProps {
     open: boolean;
@@ -269,6 +269,25 @@ export function RandomSchedulerDialog({ open, onOpenChange, currentWeekStart }: 
                                                                                 config.bodyParts.includes(part) ? "bg-primary/70 text-white" : ""
                                                                             )}
                                                                             onClick={() => toggleFilter(dateStr, 'bodyParts', part)}
+                                                                        >
+                                                                            {part}
+                                                                        </Badge>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+
+                                                            <div>
+                                                                <Label className="text-[10px] uppercase font-bold text-muted-foreground mb-1.5 block">Equipment</Label>
+                                                                <div className="flex flex-wrap gap-1.5">
+                                                                    {EQUIPMENT_OPTIONS.map(part => (
+                                                                        <Badge
+                                                                            key={part}
+                                                                            variant={config.equipment.includes(part) ? "secondary" : "outline"}
+                                                                            className={cn(
+                                                                                "cursor-pointer transition-all hover:scale-105 active:scale-95",
+                                                                                config.equipment.includes(part) ? "bg-primary/70 text-white" : ""
+                                                                            )}
+                                                                            onClick={() => toggleFilter(dateStr, 'equipment', part)}
                                                                         >
                                                                             {part}
                                                                         </Badge>

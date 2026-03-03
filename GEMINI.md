@@ -22,7 +22,7 @@
 3. **Planner/Scheduler:**
    - [x] Weekly calendar view with "Assign" functionality.
    - [x] Dynamic "Today" navigation button synced to view date.
-   - [x] **Randomized Scheduler**: Batch schedule workouts for a specific week based on user-defined filters (Type, Body Part).
+   - [x] **Randomized Scheduler**: Batch schedule workouts for a specific week based on user-defined filters (Type, Body Part, Equipment).
 4. **Workout Mode & Progress:**
    - [x] Embedded YouTube playback.
    - [x] Completion status tied to specific dates.

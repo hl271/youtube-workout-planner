@@ -163,12 +163,24 @@ This document tracks the evolution of the **YouTube Workout Planner** project, d
 
 ---
 
+## 📅 March 3, 2026: UI and Filter Refinements
+
+### 14. Equipment Filtering & Labels
+**Agent ID:** `antigravity`
+- **Goal:** Enhance the workout search experience and scheduler refinement by including equipment as a first-class filter.
+- **Codebase Progress:**
+    - **[MODIFIED]** `src/components/video-card.tsx` -> Enhanced the video card UI to automatically display a list of required equipment as secondary badges.
+    - **[MODIFIED]** `src/app/library/page.tsx` -> Integrated a new "Equipment" dropdown filter in the library header and implemented multi-tag intersection logic for matching videos.
+    - **[MODIFIED]** `src/components/random-scheduler-dialog.tsx` -> Added an "Equipment" tag selection section for each scheduled day, allowing for granular controlled randomization by required workout tools.
+
+---
+
 ## 📝 Technical Progress Tracking
 
 | Component | Status | Persistence | Optimization |
 | :--- | :--- | :--- | :--- |
 | **Core Store (Zustand)** | ✅ Stable | LocalStorage | **Specific Selectors** |
-| **Library Filters** | ✅ Advanced | N/A | Multi-Tag Filtering |
+| **Library Filters** | ✅ Advanced | N/A | **Equipment-Aware Filtering** |
 | **Planner Logic** | ✅ Complete | LocalStorage | Atomic Batch Updates |
 | **Analytics (Recharts)** | ✅ Integrated | N/A | Dynamic Imports |
 | **Visual Theming** | ✅ 5 Themes | LocalStorage | Un-layered CSS Overrides |
@@ -178,4 +190,5 @@ This document tracks the evolution of the **YouTube Workout Planner** project, d
 | **Data Protection** | ✅ Interactive | LocalStorage | **Backup Status Monitoring** |
 | **Branding** | ✅ Custom Icon | N/A | High-Res Logo Assets |
 
-*Last Updated: February 28, 2026*
+*Last Updated: March 3, 2026*
+

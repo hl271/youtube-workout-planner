@@ -96,6 +96,11 @@ export const VideoCard = memo(function VideoCard({ video }: VideoCardProps) {
                             {bp}
                         </Badge>
                     ))}
+                    {video.equipment?.map((eq) => (
+                        <Badge key={eq} variant="secondary" className="text-xs bg-muted text-muted-foreground">
+                            {eq}
+                        </Badge>
+                    ))}
                 </div>
             </CardContent>
             <CardFooter className="p-4 pt-2 border-t flex justify-between gap-2">

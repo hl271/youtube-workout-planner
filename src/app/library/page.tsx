@@ -13,8 +13,8 @@ import {
 import { VideoCard } from "@/components/video-card";
 import { Button } from "@/components/ui/button";
 import { useWorkoutStore } from "@/store/workoutStore";
-import { WorkoutType, BodyPart } from "@/types";
-import { WORKOUT_TYPES, BODY_PARTS, DURATION_RANGES, LIBRARY_BATCH_SIZE } from "@/constants";
+import { WorkoutType, BodyPart, Equipment } from "@/types";
+import { WORKOUT_TYPES, BODY_PARTS, DURATION_RANGES, EQUIPMENT_OPTIONS, LIBRARY_BATCH_SIZE } from "@/constants";
 import { XCircle } from "lucide-react";
 import dynamic from "next/dynamic";
 import { VideoSkeleton } from "@/components/video-skeleton";
@@ -26,6 +26,7 @@ const AddVideoDialog = dynamic(() => import("@/components/add-video-dialog").the
 
 const WORKOUT_TYPES_WITH_ALL: (WorkoutType | "All")[] = ["All", ...WORKOUT_TYPES];
 const BODY_PARTS_WITH_ALL: (BodyPart | "All")[] = ["All", ...BODY_PARTS];
+const EQUIPMENT_WITH_ALL: (Equipment | "All")[] = ["All", ...EQUIPMENT_OPTIONS];
 
 export default function LibraryPage() {
     const videos = useWorkoutStore((state) => state.videos);
@@ -33,6 +34,7 @@ export default function LibraryPage() {
     const [typeFilter, setTypeFilter] = useState<(WorkoutType | "All")>("All");
     const [bodyPartFilter, setBodyPartFilter] = useState<(BodyPart | "All")>("All");
     const [durationFilter, setDurationFilter] = useState<string>("All");
+    const [equipmentFilter, setEquipmentFilter] = useState<string>("All");
     const [channelFilter, setChannelFilter] = useState<string>("All");
 
     // Pagination State
@@ -44,20 +46,21 @@ export default function LibraryPage() {
         return ["All", ...uniqueChannels.sort()];
     }, [videos]);
 
-    const hasActiveFilters = search !== "" || typeFilter !== "All" || bodyPartFilter !== "All" || durationFilter !== "All" || channelFilter !== "All";
+    const hasActiveFilters = search !== "" || typeFilter !== "All" || bodyPartFilter !== "All" || durationFilter !== "All" || equipmentFilter !== "All" || channelFilter !== "All";
 
     const clearFilters = () => {
         setSearch("");
         setTypeFilter("All");
         setBodyPartFilter("All");
         setDurationFilter("All");
+        setEquipmentFilter("All");
         setChannelFilter("All");
     };
 
     // Reset pagination when filters change
     useEffect(() => {
         setVisibleCount(LIBRARY_BATCH_SIZE);
-    }, [search, typeFilter, bodyPartFilter, durationFilter, channelFilter, videos]);
+    }, [search, typeFilter, bodyPartFilter, durationFilter, equipmentFilter, channelFilter, videos]);
 
     const filteredVideos = useMemo(() => {
         return videos.filter((video) => {
@@ -74,11 +77,12 @@ export default function LibraryPage() {
                 else if (durationFilter === "over45") matchesDuration = video.duration > 45;
             }
 
+            const matchesEquipment = equipmentFilter === "All" || video.equipment?.includes(equipmentFilter as Equipment);
             const matchesChannel = channelFilter === "All" || video.channelName === channelFilter;
 
-            return matchesSearch && matchesType && matchesBodyPart && matchesDuration && matchesChannel;
+            return matchesSearch && matchesType && matchesBodyPart && matchesDuration && matchesEquipment && matchesChannel;
         });
-    }, [videos, search, typeFilter, bodyPartFilter, durationFilter, channelFilter]);
+    }, [videos, search, typeFilter, bodyPartFilter, durationFilter, equipmentFilter, channelFilter]);
 
     // Infinite Scroll Intersection Observer
     useEffect(() => {
@@ -174,6 +178,21 @@ export default function LibraryPage() {
                                 {DURATION_RANGES.map((d) => (
                                     <SelectItem key={d.value} value={d.value}>
                                         {d.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                        <Select value={equipmentFilter} onValueChange={(v) => setEquipmentFilter(v as Equipment | "All")}>
+                            <SelectTrigger className="w-[140px] h-9 text-xs">
+                                <SelectValue placeholder="Equipment" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {EQUIPMENT_WITH_ALL.map((type) => (
+                                    <SelectItem key={type} value={type}>
+                                        {type}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
